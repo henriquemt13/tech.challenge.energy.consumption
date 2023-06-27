@@ -20,7 +20,9 @@ O Fluxo de cadastro idealizado é descrito na imagem a seguir:
 
 ---
 ## Relatório Técnico
-Dentre as tecnologias utilizadas, pode se comentar o framework **Spring** do java, com sua gama de bibliotecas prontas, o **Lombok** em específico se provou uma biblioteca muito útil, redunzindo grande parte do código a apenas poucas e simples anotações. Uma outra biblioteca utilizada foi o **Mapstruct**, acredito que valha a pena mencioná-lo pelo desafio de utilizar uma ferramenta diferente da lecionada em aula, o que por fim se provou surpeendentemente bom, a biblioteca é simples de se usar e configurar, mantém um código limpo (na minha opinião até mais que o **JMapper**) e cumpre sua função de mapeamento de classes. Por fim, utilizei a anotação **@ControllerAdvice** para o tratamento de exeções. 
+Dentre as tecnologias utilizadas, pode se comentar o framework **Spring** do java, com sua gama de bibliotecas prontas, o **Lombok** em específico se provou uma biblioteca muito útil, redunzindo grande parte do código a apenas poucas e simples anotações. 
+Uma outra biblioteca utilizada foi o **Mapstruct**, acredito que valha a pena mencioná-lo pelo desafio de utilizar uma ferramenta diferente da lecionada em aula, o que por fim se provou surpeendentemente bom, a biblioteca é simples de se usar e configurar, mantém um código limpo (na minha opinião até mais que o **JMapper**) e cumpre sua função de mapeamento de classes. 
+Por fim, utilizei a anotação **@ControllerAdvice** para o tratamento de exeções. 
 Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar.
 
 
