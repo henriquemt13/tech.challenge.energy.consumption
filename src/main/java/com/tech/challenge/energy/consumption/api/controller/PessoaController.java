@@ -1,6 +1,7 @@
 package com.tech.challenge.energy.consumption.api.controller;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.PessoaResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.service.PessoaService;
 import jakarta.validation.Valid;
@@ -21,9 +22,9 @@ public class PessoaController {
     private final PessoaService service;
 
     @PostMapping
-    public ResponseEntity<Void> createPessoa(@RequestBody @Valid PessoaDTO pessoaDTO) {
-        service.createPessoa(pessoaDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<PessoaResponseDTO> createPessoa(@RequestBody @Valid PessoaDTO pessoaDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new PessoaResponseDTO(service.createPessoa(pessoaDTO)));
     }
 
     @GetMapping("/{userId}")

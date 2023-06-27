@@ -15,8 +15,10 @@ public class PessoaService {
 
     private List<Pessoa> pessoas = new ArrayList<>();
 
-    public void createPessoa(PessoaDTO pessoaDTO) {
-        pessoas.add(PessoaMapper.INSTANCE.pessoaDTOToPessoaModel(pessoaDTO, getNextId()));
+    public Long createPessoa(PessoaDTO pessoaDTO) {
+        Long id = getNextId();
+        pessoas.add(PessoaMapper.INSTANCE.pessoaDTOToPessoaModel(pessoaDTO, id));
+        return id;
     }
 
     private Long getNextId() {
