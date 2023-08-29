@@ -1,5 +1,5 @@
 package com.tech.challenge.energy.consumption.api.enums;
 
-public enum SexoEnum {
+public enum GeneroEnum {
     MASCULINO, FEMININO, OUTRO;
 }

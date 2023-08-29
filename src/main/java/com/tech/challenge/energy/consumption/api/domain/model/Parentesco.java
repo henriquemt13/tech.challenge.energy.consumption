@@ -8,14 +8,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "energy_consumption.pessoa")
-public class Pessoa {
+@Table(name = "energy_consumption.parentesco")
+public class Parentesco {
+
     @Id
     @SequenceGenerator(name = "energy_consumption.pessoa_seq",
             sequenceName = "energy_consumption.pessoa_seq", allocationSize = 1)
@@ -23,27 +23,19 @@ public class Pessoa {
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
-    @NotNull(message = "nome should not be null")
-    @NotEmpty(message = "nome should not be empty")
-    @Column(name = "nome")
-    private String nome;
-    @NotNull(message = "dataNascimento should not be null")
-    @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
-    @NotNull(message = "generoEnum should not be null")
-    @Column(name = "pessoa_genero")
-    private GeneroEnum generoEnum;
+    @NotNull(message = "idPessoa should not be null")
+    @NotEmpty(message = "idPessoa should not be empty")
+    @Column(name = "id_pessoa")
+    private Long idPessoa;
+    @NotNull(message = "idParente should not be null")
     @Column(name = "id_parente")
-    private Long parenteId;
-    @Column(name = "id_endereco")
-    private Long enderecoId;
-    @NotNull(message = "parentescoComUsuario should not be null")
-    @NotEmpty(message = "parentescoComUsuario should not be empty")
-    @Column(name = "parentesco_com_usuario")
-    private String parentescoComUsuario;
+    private Long idParente;
+    @NotNull(message = "parentesco should not be null")
+    @Column(name = "parentesco")
+    private GeneroEnum parentesco;
     @NotNull(message = "Please enter createdAt")
     @Column(name = "created_at")
-    private OffsetDateTime createdAt;
+    private OffsetDateTime createdAt = OffsetDateTime.now();
     @NotNull(message = "Please enter createdBy")
     @NotBlank(message = "Please enter createdBy")
     @Column(name = "created_by")
