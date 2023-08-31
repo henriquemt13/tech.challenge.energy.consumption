@@ -1,19 +1,19 @@
 package com.tech.challenge.energy.consumption.api.domain.model;
 
-import com.tech.challenge.energy.consumption.api.enums.GeneroEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "energy_consumption.parentesco")
+@Table(name = "parentesco")
 public class Parentesco {
 
     @Id
@@ -23,16 +23,15 @@ public class Parentesco {
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
-    @NotNull(message = "idPessoa should not be null")
-    @NotEmpty(message = "idPessoa should not be empty")
+    @NotNull(message = "pessoaId should not be null")
     @Column(name = "id_pessoa")
-    private Long idPessoa;
-    @NotNull(message = "idParente should not be null")
+    private Long pessoaId;
+    @NotNull(message = "parenteId should not be null")
     @Column(name = "id_parente")
-    private Long idParente;
+    private Long parenteId;
     @NotNull(message = "parentesco should not be null")
     @Column(name = "parentesco")
-    private GeneroEnum parentesco;
+    private String parentesco;
     @NotNull(message = "Please enter createdAt")
     @Column(name = "created_at")
     private OffsetDateTime createdAt = OffsetDateTime.now();

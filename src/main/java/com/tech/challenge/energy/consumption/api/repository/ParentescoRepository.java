@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface ParentescoRepository extends JpaRepository<Parentesco, Long> {
 
-    List<Parentesco> findByIdPessoa(Long idPessoa);
+    List<Parentesco> findByPessoaId(Long pessoaId);
+
+    List<Parentesco> findByParenteId(Long parenteId);
 }

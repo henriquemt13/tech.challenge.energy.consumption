@@ -2,11 +2,10 @@ package com.tech.challenge.energy.consumption.api.domain.mapper;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.EletrodomesticoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.EletrodomesticoDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.PessoaRequestDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.UpdateEletrodomesticoDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Eletrodomestico;
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -23,5 +22,5 @@ public interface EletrodomesticoMapper {
             UpdateEletrodomesticoDTO dto, @MappingTarget Eletrodomestico eletrodomestico);
 
     EletrodomesticoDetailDTO eletrodomesticoAndPessoaDTOsToEletrodomesticoDetailDTO(Eletrodomestico eletrodomestico,
-                                                                                    List<PessoaDTO> usuarios);
+                                                                                    List<PessoaRequestDTO> usuarios);
 }

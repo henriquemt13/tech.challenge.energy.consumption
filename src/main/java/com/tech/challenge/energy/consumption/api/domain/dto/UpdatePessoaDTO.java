@@ -4,12 +4,13 @@ import com.tech.challenge.energy.consumption.api.enums.GeneroEnum;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class UpdatePessoaDTO {
     private String nome;
     private LocalDate dataNascimento;
     private GeneroEnum generoEnum;
-    private String parentescoComUsuario;
-    private Long parenteId;
+    private List<ParentescoRequestDTO> parentes;
+    private Long enderecoId;
 }

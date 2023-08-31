@@ -1,7 +1,6 @@
 spring:
   flyway:
     enabled: true
-    schemas: energy_consumption
     locations: classpath:db/migration
   jpa:
     database: POSTGRESQL
@@ -13,7 +12,7 @@ spring:
     init:
       platform: postgresql
   datasource:
-    url: jdbc:postgresql://${DB_SERVER:localhost}:${DB_PORT:5432}/${POSTGRES_DB:postgres}
+    url: jdbc:postgresql://${DB_SERVER:localhost}:${DB_PORT:5432}/${POSTGRES_DB:postgres}?stringtype=unspecified
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:password}
     driverClassName: org.postgresql.Driver

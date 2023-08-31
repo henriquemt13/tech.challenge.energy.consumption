@@ -44,10 +44,10 @@ public class EletrodomesticoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByUserId(userId));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EletrodomesticoDetailDTO> getEletrodomesticoDetailById(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getEletrodomesticoDetailById(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<EletrodomesticoDetailDTO> getEletrodomesticoDetailById(@PathVariable("id") Long id) {
+//        return ResponseEntity.status(HttpStatus.OK).body(service.getEletrodomesticoDetailById(id));
+//    }
 
     @GetMapping
     public ResponseEntity<List<Eletrodomestico>> getAllEletrodomestico(EletrodomesticoDTO eletrodomesticoDTO) {

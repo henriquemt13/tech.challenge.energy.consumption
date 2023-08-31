@@ -10,7 +10,4 @@ import java.util.List;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>, QueryByExampleExecutor<Pessoa> {
 
-    List<Pessoa> findByParenteId(Long parenteId);
-    List<Pessoa> findByEnderecoId(Long enderecoId);
-
 }

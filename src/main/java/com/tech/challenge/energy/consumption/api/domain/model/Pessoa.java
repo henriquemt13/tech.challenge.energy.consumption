@@ -1,20 +1,22 @@
 package com.tech.challenge.energy.consumption.api.domain.model;
 
-import com.tech.challenge.energy.consumption.api.enums.GeneroEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "energy_consumption.pessoa")
+@Table(name = "pessoa")
 public class Pessoa {
     @Id
     @SequenceGenerator(name = "energy_consumption.pessoa_seq",
@@ -32,17 +34,10 @@ public class Pessoa {
     private LocalDate dataNascimento;
     @NotNull(message = "generoEnum should not be null")
     @Column(name = "pessoa_genero")
-    private GeneroEnum generoEnum;
-    @Column(name = "id_parente")
-    private Long parenteId;
-    @Column(name = "id_endereco")
-    private Long enderecoId;
-    @NotNull(message = "parentescoComUsuario should not be null")
-    @NotEmpty(message = "parentescoComUsuario should not be empty")
-    @Column(name = "parentesco_com_usuario")
-    private String parentescoComUsuario;
+    private String genero;
     @NotNull(message = "Please enter createdAt")
     @Column(name = "created_at")
+    @CreationTimestamp
     private OffsetDateTime createdAt;
     @NotNull(message = "Please enter createdBy")
     @NotBlank(message = "Please enter createdBy")

@@ -8,6 +8,6 @@ import java.util.List;
 public class PessoaDetailDTO {
 
     private Long id;
-    private Long nome;
+    private String nome;
     private List<ParenteDTO> parentes;
 }

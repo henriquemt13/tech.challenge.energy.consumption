@@ -1,15 +1,11 @@
 package com.tech.challenge.energy.consumption.api.service;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.EletrodomesticoDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.EletrodomesticoDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.UpdateEletrodomesticoDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.*;
 import com.tech.challenge.energy.consumption.api.domain.mapper.EletrodomesticoMapper;
-import com.tech.challenge.energy.consumption.api.domain.mapper.EnderecoMapper;
 import com.tech.challenge.energy.consumption.api.domain.model.Eletrodomestico;
 import com.tech.challenge.energy.consumption.api.exceptions.EletrodomesticoNotFound;
-import com.tech.challenge.energy.consumption.api.exceptions.EnderecoNotFound;
 import com.tech.challenge.energy.consumption.api.repository.EletrodomesticoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -20,6 +16,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class EletrodomesticoService {
 
     private final PessoaService pessoaService;
@@ -66,17 +63,17 @@ public class EletrodomesticoService {
         repository.delete(eletrodomestico.get());
     }
 
-    public EletrodomesticoDetailDTO getEletrodomesticoDetailById(Long id) {
-        Optional<Eletrodomestico> optionalEletrodomestico = findById(id);
-        if (optionalEletrodomestico.isEmpty()) {
-            throw new EletrodomesticoNotFound(id);
-        }
-        Eletrodomestico eletrodomestico = optionalEletrodomestico.get();
-        List<PessoaDTO> usuarios = enderecoService.findEnderecoDetailById(eletrodomestico.getId()).getResidentes();
-        return mapper
-                .eletrodomesticoAndPessoaDTOsToEletrodomesticoDetailDTO(eletrodomestico, usuarios);
-
-    }
+//    public EletrodomesticoDetailDTO getEletrodomesticoDetailById(Long id) {
+//        Optional<Eletrodomestico> optionalEletrodomestico = findById(id);
+//        if (optionalEletrodomestico.isEmpty()) {
+//            throw new EletrodomesticoNotFound(id);
+//        }
+//        Eletrodomestico eletrodomestico = optionalEletrodomestico.get();
+//        List<PessoaRequestDTO> usuarios = enderecoService.findEnderecoDetailById(eletrodomestico.getId()).getResidentes();
+//        return mapper
+//                .eletrodomesticoAndPessoaDTOsToEletrodomesticoDetailDTO(eletrodomestico, usuarios);
+//
+//    }
 
     public List<Eletrodomestico> findByFilter(EletrodomesticoDTO eletrodomesticoDTO) {
         ExampleMatcher matcher = getExampleMatcher();

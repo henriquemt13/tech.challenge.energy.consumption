@@ -6,14 +6,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "energy_consumption.eletrodomestico")
+@Table(name = "eletrodomestico")
 public class Eletrodomestico {
 
     @Id
@@ -23,8 +24,9 @@ public class Eletrodomestico {
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
-    @JoinColumn(name = "id_endereco")
-    private Long enderecoId;
+    @NotNull(message = "pessoaId should not be null")
+    @Column(name = "id_pessoa")
+    private Long pessoaId;
     @NotNull(message = "nome should not be null")
     @NotEmpty(message = "nome should not be null")
     @Column(name = "nome")

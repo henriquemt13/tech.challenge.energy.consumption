@@ -11,5 +11,5 @@ public class EletrodomesticoDetailDTO {
     private String nome;
     private String modelo;
     private Integer potencia;
-    private List<PessoaDTO> usuarios;
+    private List<PessoaRequestDTO> usuarios;
 }

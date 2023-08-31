@@ -1,6 +1,6 @@
 package com.tech.challenge.energy.consumption.api.controller;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.PessoaRequestDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDetailDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.PessoaResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.UpdatePessoaDTO;
@@ -26,9 +26,9 @@ public class PessoaController {
     private final PessoaService service;
 
     @PostMapping
-    public ResponseEntity<PessoaResponseDTO> createPessoa(@RequestBody @Valid PessoaDTO pessoaDTO) {
+    public ResponseEntity<PessoaResponseDTO> createPessoa(@RequestBody @Valid PessoaRequestDTO pessoaRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new PessoaResponseDTO(service.save(pessoaDTO)));
+                .body(new PessoaResponseDTO(service.save(pessoaRequestDTO)));
     }
 
     @PutMapping("/{userId}")
@@ -45,8 +45,8 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Pessoa>> getAllPessoas(PessoaDTO pessoaDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(pessoaDTO));
+    public ResponseEntity<List<Pessoa>> getAllPessoas(PessoaRequestDTO pessoaRequestDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(pessoaRequestDTO));
     }
 
     @GetMapping("/parentes/{userId}")

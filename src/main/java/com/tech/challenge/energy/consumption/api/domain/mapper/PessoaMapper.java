@@ -1,20 +1,17 @@
 package com.tech.challenge.energy.consumption.api.domain.mapper;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.UpdatePessoaDTO;
-import com.tech.challenge.energy.consumption.api.domain.model.Parentesco;
+import com.tech.challenge.energy.consumption.api.domain.dto.*;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
+
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, componentModel = "spring")
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface PessoaMapper {
 
-    Pessoa pessoaDTOToPessoaModel(PessoaDTO pessoaDTO);
+    Pessoa pessoaRequestDTOToPessoaModel(PessoaRequestDTO pessoaRequestDTO);
 
     @Named("updateUserFromUserDto")
     @Mapping(target = "id", ignore = true)
@@ -24,5 +21,7 @@ public interface PessoaMapper {
 
     PessoaDTO pessoaToPessoaDTO(Pessoa pessoa);
 
-    List<PessoaDTO> pessoasToPessoaDTOs(List<Pessoa> pessoas);
+    Pessoa pessoaToPessoaModel(PessoaDTO pessoaDTO);
+
+    List<PessoaRequestDTO> pessoasToPessoaDTOs(List<Pessoa> pessoas);
 }
