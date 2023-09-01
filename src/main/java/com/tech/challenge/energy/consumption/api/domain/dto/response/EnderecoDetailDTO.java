@@ -1,5 +1,6 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.response;
 
+import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class EnderecoDetailDTO {
     private String cidade;
     private String bairro;
     private String estado;
+    private PessoaDTO dono;
     private List<PessoaDTO> residentes;
 
 }

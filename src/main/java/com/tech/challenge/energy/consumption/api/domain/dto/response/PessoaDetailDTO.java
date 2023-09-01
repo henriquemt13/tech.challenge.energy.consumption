@@ -1,5 +1,6 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.response;
 
+import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
 import lombok.Data;
 
 import java.util.List;

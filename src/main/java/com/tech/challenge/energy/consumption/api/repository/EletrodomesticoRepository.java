@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface EletrodomesticoRepository extends JpaRepository<Eletrodomestico, Long>,
         QueryByExampleExecutor<Eletrodomestico> {
-
-    List<Eletrodomestico> findByEnderecoId(Long enderecoId);
+    List<Eletrodomestico> findByPessoaId(Long pessoaId);
 }

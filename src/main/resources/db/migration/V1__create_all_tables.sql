@@ -37,14 +37,10 @@ create table endereco(
 	cidade varchar(100),
 	bairro varchar(100),
 	estado varchar(100),
-	id_pessoa bigint not null,
 	created_at timestamp,
 	created_by varchar(60),
 	updated_at timestamp,
-	updated_by varchar(60),
-    constraint fk_pessoa
-        foreign key (id_pessoa)
-            references pessoa(id)
+	updated_by varchar(60)
 );
 ALTER SEQUENCE endereco_seq
 OWNED BY endereco.id;
@@ -58,9 +54,12 @@ create table residentes_endereco(
     created_by varchar(60) not null,
     updated_at timestamp,
     updated_by varchar(60),
-       constraint fk_pessoa
+   constraint fk_pessoa
         foreign key (id_pessoa)
-            references pessoa(id)
+            references pessoa(id),
+    constraint fk_endereco
+        foreign key (id_endereco)
+            references endereco(id)
 );
 ALTER SEQUENCE parentesco_seq
 OWNED BY parentesco.id;

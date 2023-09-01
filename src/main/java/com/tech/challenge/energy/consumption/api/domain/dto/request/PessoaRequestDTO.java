@@ -1,4 +1,4 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.request;
 
 import com.tech.challenge.energy.consumption.api.enums.GeneroEnum;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,8 +14,7 @@ public class PessoaRequestDTO {
     private String nome;
     @NotNull(message = "dataNascimento should not be null")
     private LocalDate dataNascimento;
-    @NotNull(message = "sexoEnum should not be null")
+    @NotNull(message = "genero should not be null")
     private GeneroEnum genero;
     private List<ParentescoRequestDTO> parentes;
-    private Long enderecoId;
 }

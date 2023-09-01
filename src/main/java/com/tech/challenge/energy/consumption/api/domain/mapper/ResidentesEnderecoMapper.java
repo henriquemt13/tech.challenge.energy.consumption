@@ -13,4 +13,6 @@ public interface ResidentesEnderecoMapper {
     ResidentesEnderecoDTO residentesEnderecoToResidentesEnderecoDTO(ResidentesEndereco residentesEndereco);
 
     List<ResidentesEnderecoDTO> residentesEnderecoToResidentesEnderecoDTO(List<ResidentesEndereco> residentesEndereco);
+
+    ResidentesEndereco residentesEnderecoDTOToResidentesEndereco(ResidentesEnderecoDTO residentesEnderecoDTO);
 }

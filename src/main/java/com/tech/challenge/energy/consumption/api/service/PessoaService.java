@@ -1,10 +1,12 @@
 package com.tech.challenge.energy.consumption.api.service;
 
+import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaRequestDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.UpdatePessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.PessoaRequestDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaDetailDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdatePessoaDTO;
 import com.tech.challenge.energy.consumption.api.domain.mapper.PessoaMapper;
+import com.tech.challenge.energy.consumption.api.domain.model.Parentesco;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.exceptions.PessoaNotFound;
 import com.tech.challenge.energy.consumption.api.repository.PessoaRepository;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,13 +44,9 @@ public class PessoaService {
         }
     }
 
-    public void updateEndereco(PessoaDTO pessoaDTO) {
-        repository.save(mapper.pessoaToPessoaModel(pessoaDTO));
-    }
-
-    public void validateUserId(Long userId) {
-        if (!repository.existsById(userId)) {
-            throw new PessoaNotFound(userId);
+    public void validatePessoaId(Long pessoaId) {
+        if (!repository.existsById(pessoaId)) {
+            throw new PessoaNotFound(pessoaId);
         }
     }
 
@@ -63,28 +62,40 @@ public class PessoaService {
         return mapper.pessoaToPessoaDTO(optionalPessoa.get());
     }
 
-    public PessoaDetailDTO findParentesById(Long userId) {
-        Optional<Pessoa> optionalPessoa = findById(userId);
+    public PessoaDetailDTO findParentesById(Long pessoaId) {
+        Optional<Pessoa> optionalPessoa = findById(pessoaId);
         if (optionalPessoa.isEmpty()) {
-            throw new PessoaNotFound(userId);
+            throw new PessoaNotFound(pessoaId);
         }
         Pessoa pessoa = optionalPessoa.get();
-        var parentes = parentescoService.getParentes(userId);
-        parentes.forEach(parente -> parente.setNome(getPessoaById(parente.getId()).getNome()));
-        return mapper.pessoaAndParenteDTOsToPessoaDetailDTO(pessoa, parentes);
+        var parentes = parentescoService.getParentes(pessoaId);
+        return mapper.pessoaAndParenteDTOsToPessoaDetailDTO(pessoa, validateParentes(parentes, pessoaId));
+    }
+
+    public List<ParenteDTO> validateParentes(List<ParenteDTO> parentes, Long pessoaId) {
+        for (ParenteDTO parente : parentes) {
+            if (Objects.equals(parente.getParenteId(), pessoaId)) {
+                parente.setNome(getPessoaById(parente.getPessoaId()).getNome());
+                parente.setId(parente.getPessoaId());
+            } else {
+                parente.setNome(getPessoaById(parente.getParenteId()).getNome());
+                parente.setId(parente.getParenteId());
+            }
+        }
+        return parentes;
     }
 
     public List<Pessoa> findAll() {
         return repository.findAll();
     }
 
-    public void delete(Long userId) {
-        Optional<Pessoa> optionalPessoa = findById(userId);
+    public void delete(Long pessoaId) {
+        Optional<Pessoa> optionalPessoa = findById(pessoaId);
         if (optionalPessoa.isEmpty()) {
-            throw new PessoaNotFound(userId);
+            throw new PessoaNotFound(pessoaId);
         }
         Pessoa pessoa = optionalPessoa.get();
-        parentescoService.deleteParentescosByPessoaId(userId);
+        parentescoService.deleteParentescosByPessoaId(pessoaId);
         repository.delete(pessoa);
     }
 

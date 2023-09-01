@@ -1,7 +1,7 @@
 package com.tech.challenge.energy.consumption.api.domain.mapper;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.ParentescoRequestDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.ParentescoRequestDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Parentesco;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,7 +14,6 @@ public interface ParentescoMapper {
 
     List<ParenteDTO> parentescoToParenteDTO(List<Parentesco> parentesco);
 
-    @Mapping(source = "pessoaId", target = "id")
     ParenteDTO parentescoToParenteDTO(Parentesco parentesco);
 
     @Mapping(source = "parentesco.parenteId", target = "parenteId")

@@ -1,7 +1,7 @@
 package com.tech.challenge.energy.consumption.api.service;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.ParentescoRequestDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.ParentescoRequestDTO;
 import com.tech.challenge.energy.consumption.api.domain.mapper.ParentescoMapper;
 import com.tech.challenge.energy.consumption.api.domain.model.Parentesco;
 import com.tech.challenge.energy.consumption.api.repository.ParentescoRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -30,8 +29,6 @@ public class ParentescoService {
         List<Parentesco> parentes = new ArrayList<>();
         parentes.addAll(findByParenteId(pessoaId));
         parentes.addAll(findByPessoaId(pessoaId));
-        parentes.removeAll(parentes.stream()
-                .filter(parentesco -> Objects.equals(parentesco.getPessoaId(), pessoaId)).toList());
         return parentes.stream().distinct().toList();
     }
 
@@ -46,7 +43,6 @@ public class ParentescoService {
     public void saveParentesco(Long pessoaId, ParentescoRequestDTO parentesco) {
         Parentesco parentescoModel = mapper.pessoaDTOToParentesco(pessoaId, parentesco);
         parentescoModel.setCreatedBy("System");
-        parentescoModel.setCreatedAt(OffsetDateTime.now());
         repository.save(parentescoModel);
     }
 
@@ -55,7 +51,9 @@ public class ParentescoService {
     }
 
     public void deleteParentescosByPessoaId(Long pessoaId) {
-        List<Parentesco> parentescos = findByPessoaId(pessoaId);
+        List<Parentesco> parentescos = new ArrayList<>();
+        parentescos.addAll(findByPessoaId(pessoaId));
+        parentescos.addAll(findByParenteId(pessoaId));
         for (Parentesco parentesco : parentescos) {
             deleteParentesco(parentesco);
         }

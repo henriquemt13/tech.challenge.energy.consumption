@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -17,9 +18,9 @@ import java.time.OffsetDateTime;
 public class Parentesco {
 
     @Id
-    @SequenceGenerator(name = "energy_consumption.pessoa_seq",
-            sequenceName = "energy_consumption.pessoa_seq", allocationSize = 1)
-    @GeneratedValue(generator = "energy_consumption.pessoa_seq")
+    @SequenceGenerator(name = "parentesco_seq",
+            sequenceName = "parentesco_seq", allocationSize = 1)
+    @GeneratedValue(generator = "parentesco_seq")
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
@@ -32,7 +33,7 @@ public class Parentesco {
     @NotNull(message = "parentesco should not be null")
     @Column(name = "parentesco")
     private String parentesco;
-    @NotNull(message = "Please enter createdAt")
+    @CreationTimestamp
     @Column(name = "created_at")
     private OffsetDateTime createdAt = OffsetDateTime.now();
     @NotNull(message = "Please enter createdBy")

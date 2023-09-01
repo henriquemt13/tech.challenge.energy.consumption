@@ -10,5 +10,7 @@ public interface ResidentesEnderecoRepository extends JpaRepository<ResidentesEn
 
     List<ResidentesEndereco> findByEnderecoId(Long enderecoId);
 
+    List<ResidentesEndereco> findByPessoaId(Long pessoaId);
+
     Optional<ResidentesEndereco> findByEnderecoIdAndPessoaId(Long enderecoId, Long pessoaId);
 }

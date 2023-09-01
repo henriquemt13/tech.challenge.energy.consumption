@@ -24,6 +24,9 @@ public class ResidentesEnderecoService {
         return repository.findByEnderecoId(enderecoId);
     }
 
+    public List<ResidentesEndereco> findByPessoaId(Long pessoaId) {
+        return repository.findByPessoaId(pessoaId);
+    }
 
     public List<ResidentesEnderecoDTO> getByEnderecoId(Long enderecoId) {
         return mapper.residentesEnderecoToResidentesEnderecoDTO(findByEnderecoId(enderecoId));
@@ -32,8 +35,16 @@ public class ResidentesEnderecoService {
     public Optional<ResidentesEndereco> findById(Long id) {
         return repository.findById(id);
     }
+
     public Optional<ResidentesEndereco> findByEnderecoIdAndPessoaId(Long enderecoId, Long pessoaId) {
         return repository.findByEnderecoIdAndPessoaId(enderecoId, pessoaId);
+    }
+
+    public void save(Long enderecoId, Long pessoaId) {
+        ResidentesEndereco residenteEndereco = mapper.residentesEnderecoDTOToResidentesEndereco(
+                new ResidentesEnderecoDTO(pessoaId, enderecoId));
+        residenteEndereco.setCreatedBy("System");
+        repository.save(residenteEndereco);
     }
 
     public void deleteByEnderecoIdAndPessoaId(Long enderecoId, Long pessoaId) {
@@ -43,6 +54,13 @@ public class ResidentesEnderecoService {
                     .format("Relation between Pessoa ID [%d] or Endereco ID [%s] not found", pessoaId, enderecoId));
         }
         repository.delete(residente.get());
+    }
+
+    public void deleteByEnderecoId(Long enderecoId) {
+        List<ResidentesEndereco> residentes = findByEnderecoId(enderecoId);
+        for (ResidentesEndereco residente : residentes) {
+            repository.delete(residente);
+        }
     }
 
 }

@@ -1,9 +1,7 @@
 package com.tech.challenge.energy.consumption.api.controller;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.EnderecoDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.PessoaResponseDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.UpdateEnderecoDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.UpdatePessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.EnderecoDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdateEnderecoDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Endereco;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.exceptions.EnderecoNotFound;
@@ -25,28 +23,28 @@ public class EnderecoController {
 
     private final EnderecoService service;
 
-    @PostMapping("/{userId}")
-    public ResponseEntity createEndereco(@RequestBody @Valid EnderecoDTO enderecoDTO, @PathVariable("userId") Long userId) {
-        service.save(enderecoDTO, userId);
+    @PostMapping("/pessoa/{pessoaId}")
+    public ResponseEntity createEndereco(@RequestBody @Valid EnderecoDTO enderecoDTO, @PathVariable("pessoaId") Long pessoaId) {
+        service.save(enderecoDTO, pessoaId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<Void> updateEndereco(@PathVariable("userId") Long userId,
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateEndereco(@PathVariable("id") Long id,
                                                           @RequestBody @Valid UpdateEnderecoDTO enderecoDTO) {
-        Optional<Endereco> optionalEndereco = service.findById(userId);
+        Optional<Endereco> optionalEndereco = service.findById(id);
         if (optionalEndereco.isEmpty()) {
-            throw new EnderecoNotFound(userId);
+            throw new EnderecoNotFound(id);
         }
         service.update(enderecoDTO, optionalEndereco.get());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<Endereco> getEnderecoById(@PathVariable("userId") Long userId) {
-        Optional<Endereco> optionalEndereco = service.findById(userId);
+    @GetMapping("/{id}")
+    public ResponseEntity<Endereco> getEnderecoById(@PathVariable("id") Long id) {
+        Optional<Endereco> optionalEndereco = service.findById(id);
         if (optionalEndereco.isEmpty()) {
-            throw new EnderecoNotFound(userId);
+            throw new EnderecoNotFound(id);
         }
         return ResponseEntity.status(HttpStatus.OK).body(optionalEndereco.get());
     }
@@ -56,9 +54,28 @@ public class EnderecoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(enderecoDTO));
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Pessoa> deleteEnderecoByUserId(@PathVariable("userId") Long userId) {
-        service.delete(userId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEnderecoById(@PathVariable("id") Long id) {
+        service.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/{enderecoId}/pessoa/{pessoaId}")
+    public ResponseEntity<Void> addResidente(@PathVariable("enderecoId") Long enderecoId,
+                                             @PathVariable("pessoaId") Long pessoaId) {
+        service.addResidente(enderecoId, pessoaId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{id}/residentes")
+    public ResponseEntity getResidentesById(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findEnderecoDetailById(id));
+    }
+
+    @DeleteMapping("/{enderecoId}/pessoa/{pessoaId}")
+    public ResponseEntity<Void> removeResidente(@PathVariable("enderecoId") Long enderecoId,
+                                                @PathVariable("pessoaId") Long pessoaId) {
+        service.removeResidente(enderecoId, pessoaId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

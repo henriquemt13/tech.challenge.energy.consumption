@@ -1,6 +1,10 @@
 package com.tech.challenge.energy.consumption.api.domain.mapper;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.*;
+import com.tech.challenge.energy.consumption.api.domain.dto.ParenteDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.PessoaRequestDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdatePessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaDetailDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 
 import org.mapstruct.*;

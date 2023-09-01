@@ -1,9 +1,15 @@
 package com.tech.challenge.energy.consumption.api.service;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.*;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.EnderecoDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdateEnderecoDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.EnderecoDetailDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.EnderecoResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.mapper.EnderecoMapper;
 import com.tech.challenge.energy.consumption.api.domain.model.Endereco;
+import com.tech.challenge.energy.consumption.api.domain.model.ResidentesEndereco;
 import com.tech.challenge.energy.consumption.api.exceptions.EnderecoNotFound;
+import com.tech.challenge.energy.consumption.api.exceptions.NotFoundException;
 import com.tech.challenge.energy.consumption.api.repository.EnderecoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -25,21 +31,49 @@ public class EnderecoService {
     private final EnderecoMapper mapper;
     private final ResidentesEnderecoService residentesEnderecoService;
 
-    public void save(EnderecoDTO enderecoDTO, Long userId) {
-        Endereco endereco = repository.save(mapper.enderecoDTOToEnderecoModel(enderecoDTO));
-        PessoaDTO pessoaDTO = pessoaService.getPessoaById(userId);
-        pessoaDTO.setEnderecoId(endereco.getId());
-        pessoaService.updateEndereco(pessoaDTO);
+    public EnderecoResponseDTO save(EnderecoDTO enderecoDTO, Long pessoaId) {
+        pessoaService.validatePessoaId(pessoaId);
+        Endereco endereco = mapper.enderecoDTOToEnderecoModel(enderecoDTO);
+        endereco.setCreatedBy("System");
+        repository.save(endereco);
+        addResidente(endereco.getId(), pessoaId);
+        return EnderecoResponseDTO.builder().id(endereco.getId()).build();
+    }
+
+    public void addResidente(Long enderecoId, Long pessoaId) {
+        pessoaService.validatePessoaId(pessoaId);
+        if (isValidToAddResidente(enderecoId, pessoaId)) {
+            residentesEnderecoService.save(enderecoId, pessoaId);
+        } else {
+            throw new NotFoundException(String.format("Pessoa ID [%s] and Endereco ID [%s] are already related",
+                    pessoaId, enderecoId));
+        }
+    }
+
+    public void removeResidente(Long enderecoId, Long pessoaId) {
+        pessoaService.validatePessoaId(pessoaId);
+        if (isValidToRemoveResidente(enderecoId, pessoaId)) {
+            residentesEnderecoService.deleteByEnderecoIdAndPessoaId(enderecoId, pessoaId);
+        } else {
+            throw new NotFoundException(String.format("Pessoas ID [%s] or Endereco ID [%s] relation not found",
+                    pessoaId, enderecoId));
+        }
+    }
+
+    public boolean isValidToAddResidente(Long enderecoId, Long pessoaId) {
+        return residentesEnderecoService.findByPessoaId(pessoaId).isEmpty()
+                && findById(enderecoId).isPresent();
+    }
+
+    public boolean isValidToRemoveResidente(Long enderecoId, Long pessoaId) {
+        return residentesEnderecoService.findByEnderecoIdAndPessoaId(enderecoId, pessoaId).isPresent()
+                && findById(enderecoId).isPresent();
     }
 
     public void update(UpdateEnderecoDTO enderecoDTO, Endereco endereco) {
         repository.save(mapper.updateEnderecoFromUpdateEnderecoDTO(enderecoDTO, endereco));
     }
 
-    public Optional<Endereco> findByUserId(Long userId) {
-        PessoaDTO pessoaDTO = pessoaService.getPessoaById(userId);
-        return findById(pessoaDTO.getEnderecoId());
-    }
 
     public List<Endereco> findAll() {
         return repository.findAll();
@@ -54,6 +88,7 @@ public class EnderecoService {
         if (endereco.isEmpty()) {
             throw new EnderecoNotFound(id);
         }
+        residentesEnderecoService.deleteByEnderecoId(id);
         repository.delete(endereco.get());
     }
 
@@ -76,7 +111,7 @@ public class EnderecoService {
     public List<PessoaDTO> getResidentesInfo(List<ResidentesEnderecoDTO> residentes) {
         List<PessoaDTO> pessoas = new ArrayList<>();
         for (ResidentesEnderecoDTO residente : residentes ) {
-            pessoas.add(pessoaService.getPessoaById(residente.getId()));
+            pessoas.add(pessoaService.getPessoaById(residente.getPessoaId()));
         }
         return pessoas;
     }

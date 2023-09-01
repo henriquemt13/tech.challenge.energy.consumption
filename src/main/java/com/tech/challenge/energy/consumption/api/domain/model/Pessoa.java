@@ -19,9 +19,9 @@ import java.time.OffsetDateTime;
 @Table(name = "pessoa")
 public class Pessoa {
     @Id
-    @SequenceGenerator(name = "energy_consumption.pessoa_seq",
-            sequenceName = "energy_consumption.pessoa_seq", allocationSize = 1)
-    @GeneratedValue(generator = "energy_consumption.pessoa_seq")
+    @SequenceGenerator(name = "pessoa_seq",
+            sequenceName = "pessoa_seq", allocationSize = 1)
+    @GeneratedValue(generator = "pessoa_seq")
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
@@ -35,7 +35,6 @@ public class Pessoa {
     @NotNull(message = "generoEnum should not be null")
     @Column(name = "pessoa_genero")
     private String genero;
-    @NotNull(message = "Please enter createdAt")
     @Column(name = "created_at")
     @CreationTimestamp
     private OffsetDateTime createdAt;

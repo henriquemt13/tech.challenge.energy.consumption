@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -18,9 +19,9 @@ import java.time.OffsetDateTime;
 public class Endereco {
 
     @Id
-    @SequenceGenerator(name = "energy_consumption.endereco_seq",
-            sequenceName = "energy_consumption.endereco_seq", allocationSize = 1)
-    @GeneratedValue(generator = "energy_consumption.endereco_seq")
+    @SequenceGenerator(name = "endereco_seq",
+            sequenceName = "endereco_seq", allocationSize = 1)
+    @GeneratedValue(generator = "endereco_seq")
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
@@ -38,10 +39,7 @@ public class Endereco {
     @NotNull(message = "estado should not be null")
     @NotEmpty(message = "estado should not be null")
     private String estado;
-    @NotNull(message = "pessoaId should not be null")
-    @Column(name = "id_pessoa")
-    private Long pessoaId;
-    @NotNull(message = "Please enter createdAt")
+    @CreationTimestamp
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
     @NotNull(message = "Please enter createdBy")

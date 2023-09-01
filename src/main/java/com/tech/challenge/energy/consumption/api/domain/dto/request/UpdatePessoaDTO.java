@@ -1,5 +1,6 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.request;
 
+import com.tech.challenge.energy.consumption.api.domain.dto.request.ParentescoRequestDTO;
 import com.tech.challenge.energy.consumption.api.enums.GeneroEnum;
 import lombok.Data;
 

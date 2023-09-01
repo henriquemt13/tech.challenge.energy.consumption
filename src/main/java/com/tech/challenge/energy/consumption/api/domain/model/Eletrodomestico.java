@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -18,9 +19,9 @@ import java.time.OffsetDateTime;
 public class Eletrodomestico {
 
     @Id
-    @SequenceGenerator(name = "energy_consumption.eletrodomestico_seq",
-            sequenceName = "energy_consumption.eletrodomestico_seq", allocationSize = 1)
-    @GeneratedValue(generator = "energy_consumption.eletrodomestico_seq")
+    @SequenceGenerator(name = "eletrodomestico_seq",
+            sequenceName = "eletrodomestico_seq", allocationSize = 1)
+    @GeneratedValue(generator = "eletrodomestico_seq")
     @Column(name = "id", unique = true)
     @NotNull(message = "id should not be null")
     private Long id;
@@ -38,7 +39,7 @@ public class Eletrodomestico {
     @NotNull(message = "potencia should not be null")
     @Column(name = "potencia")
     private Integer potencia;
-    @NotNull(message = "Please enter createdAt")
+    @CreationTimestamp
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
     @NotNull(message = "Please enter createdBy")

@@ -1,5 +1,6 @@
 package com.tech.challenge.energy.consumption.api.domain.dto;
 
+import com.tech.challenge.energy.consumption.api.domain.dto.request.ParentescoRequestDTO;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -12,5 +13,4 @@ public class PessoaDTO {
     private LocalDate dataNascimento;
     private String genero;
     private List<ParentescoRequestDTO> parentes;
-    private Long enderecoId;
 }
