@@ -45,8 +45,8 @@ public class EletrodomesticoController {
     }
 
     @GetMapping("/{id}/consumo")
-    public ResponseEntity<EletrodomesticoDetailDTO> getConsumoByTimeRange(@PathVariable("id") Long id, Time startTime, Time endTime) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getEletrodomesticoDetailById(id));
+    public ResponseEntity<EletrodomesticoDetailDTO> getConsumoByTimeRange(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getEletrodomesticoDetail(id));
     }
 
     @GetMapping("/{id}")

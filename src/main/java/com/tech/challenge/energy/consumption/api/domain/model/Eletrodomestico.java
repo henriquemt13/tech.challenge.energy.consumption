@@ -39,6 +39,9 @@ public class Eletrodomestico {
     @NotNull(message = "potencia should not be null")
     @Column(name = "potencia")
     private Integer potencia;
+    @NotNull(message = "horasUsoDia should not be null")
+    @Column(name = "horas_uso_dia")
+    private Integer horasUsoDia;
     @CreationTimestamp
     @Column(name = "created_at")
     private OffsetDateTime createdAt;

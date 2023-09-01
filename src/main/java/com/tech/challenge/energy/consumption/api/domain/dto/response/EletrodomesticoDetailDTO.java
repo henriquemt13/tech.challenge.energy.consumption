@@ -1,16 +1,19 @@
 package com.tech.challenge.energy.consumption.api.domain.dto.response;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.request.PessoaRequestDTO;
+import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.sql.Time;
 
 @Data
+@Builder
 public class EletrodomesticoDetailDTO {
 
     private Long id;
     private String nome;
     private String modelo;
-    private Integer potencia;
-    private List<PessoaRequestDTO> usuarios;
+    private String potencia;
+    private Integer horas_uso_dia;
+    private String mediaConsumoEnergia;
 }

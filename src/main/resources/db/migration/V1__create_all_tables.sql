@@ -68,11 +68,12 @@ create sequence eletrodomestico_seq;
 create table eletrodomestico(
 	id bigint primary key  not null DEFAULT nextval('eletrodomestico_seq'),
 	id_pessoa bigint not null,
-	nome varchar(50),
-	modelo varchar(50),
-	potencia int,
-	created_at timestamp,
-	created_by varchar(60),
+	nome varchar(50) not null,
+	modelo varchar(50) not null,
+	potencia int not null,
+    horas_uso_dia int not null,
+	created_at timestamp not null,
+	created_by varchar(60) not null,
 	updated_at timestamp,
 	updated_by varchar(60),
     constraint fk_pessoa

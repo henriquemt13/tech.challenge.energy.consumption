@@ -14,6 +14,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,12 +44,29 @@ public class EletrodomesticoService {
                 .updateEletrodomesticoFromUpdateEletrodomesticoDTO(eletrodomesticoDTO, eletrodomestico.get()));
     }
 
-    public List<Eletrodomestico> findByPessoaId(Long pessoaId) {
-        return repository.findByPessoaId(pessoaId);
+    public EletrodomesticoDetailDTO getEletrodomesticoDetail(Long id) {
+        Optional<Eletrodomestico> eletrodomestico = findById(id);
+        if (eletrodomestico.isEmpty()) {
+            throw new EletrodomesticoNotFound(id);
+        }
+        EletrodomesticoDetailDTO detailDTO = mapper.eletrodomesticoToEletrodomesticoDetailDTO(eletrodomestico.get());
+        setConsumoValues(detailDTO, eletrodomestico.get());
+        return detailDTO;
     }
 
-    public List<Eletrodomestico> findAll() {
-        return repository.findAll();
+    private EletrodomesticoDetailDTO setConsumoValues(EletrodomesticoDetailDTO detailDTO, Eletrodomestico eletrodomestico) {
+        detailDTO.setPotencia(String.format("%s W", eletrodomestico.getPotencia()));
+        detailDTO.setMediaConsumoEnergia(String.format("%s kWh",
+                calculateConsumo(eletrodomestico.getHorasUsoDia(), eletrodomestico.getPotencia())));
+        return detailDTO;
+    }
+
+    private BigDecimal calculateConsumo(Integer horasConsumoDia, Integer potencia) {
+        return BigDecimal.valueOf(((long) potencia * horasConsumoDia) / 1000);
+    }
+
+    public List<Eletrodomestico> findByPessoaId(Long pessoaId) {
+        return repository.findByPessoaId(pessoaId);
     }
 
     public Optional<Eletrodomestico> findById(Long id) {

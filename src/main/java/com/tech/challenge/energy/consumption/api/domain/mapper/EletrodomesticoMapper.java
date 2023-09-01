@@ -22,6 +22,5 @@ public interface EletrodomesticoMapper {
     Eletrodomestico updateEletrodomesticoFromUpdateEletrodomesticoDTO(
             UpdateEletrodomesticoDTO dto, @MappingTarget Eletrodomestico eletrodomestico);
 
-    EletrodomesticoDetailDTO eletrodomesticoAndPessoaDTOsToEletrodomesticoDetailDTO(Eletrodomestico eletrodomestico,
-                                                                                    List<PessoaRequestDTO> usuarios);
+    EletrodomesticoDetailDTO eletrodomesticoToEletrodomesticoDetailDTO(Eletrodomestico eletrodomestico);
 }
