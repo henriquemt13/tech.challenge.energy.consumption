@@ -49,7 +49,7 @@ Para rodar a aplicação localmente, foi criado um docker-compose, que se encont
 Ao iniciar a aplicação, acesse o link http://localhost:8080/swagger-ui/index.html#/ para visualizar o Swagger, contendo a documentação dos endpoints desenvolvidos
 <br>
 <br>
-Nota: Todos os endpoints "findAll" possuem suporte para filtro de qualquer um dos campos da entidade requerida, mas se optar por testá-lo sem filtros, é só chamá-lo sem passar nenhum parametro!
+Nota: Todos os endpoints "findAll()" possuem suporte para filtro de qualquer um dos campos da entidade requerida, mas se optar por testá-lo sem filtros, é só chamá-lo sem passar nenhum parametro!
 
 
 ---
