@@ -33,6 +33,7 @@ public class EnderecoService {
         pessoaService.validatePessoaId(pessoaId);
         Endereco endereco = mapper.enderecoDTOToEnderecoModel(enderecoDTO);
         endereco.setCreatedBy("System");
+        endereco.setUpdatedBy("System");
         repository.save(endereco);
         addResidente(endereco.getId(), pessoaId);
         return endereco.getId();
@@ -69,7 +70,9 @@ public class EnderecoService {
     }
 
     public void update(UpdateEnderecoDTO enderecoDTO, Endereco endereco) {
-        repository.save(mapper.updateEnderecoFromUpdateEnderecoDTO(enderecoDTO, endereco));
+        Endereco updateEndereco = mapper.updateEnderecoFromUpdateEnderecoDTO(enderecoDTO, endereco);
+        updateEndereco.setUpdatedBy("System");
+        repository.save(updateEndereco);
     }
 
 

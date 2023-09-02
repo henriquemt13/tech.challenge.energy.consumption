@@ -31,6 +31,7 @@ public class EletrodomesticoService {
         pessoaService.validatePessoaId(pessoaId);
         Eletrodomestico eletrodomestico = mapper.eletrodomesticoDTOToEletrodomesticoModel(eletrodomesticoDTO, pessoaId);
         eletrodomestico.setCreatedBy("System");
+        eletrodomestico.setUpdatedBy("System");
         return repository.save(eletrodomestico).getId();
     }
 
@@ -39,8 +40,10 @@ public class EletrodomesticoService {
         if (eletrodomestico.isEmpty()) {
             throw new EletrodomesticoNotFound(id);
         }
-        repository.save(mapper
-                .updateEletrodomesticoFromUpdateEletrodomesticoDTO(eletrodomesticoDTO, eletrodomestico.get()));
+        Eletrodomestico updateEletrodomestico = mapper
+                .updateEletrodomesticoFromUpdateEletrodomesticoDTO(eletrodomesticoDTO, eletrodomestico.get());
+        updateEletrodomestico.setUpdatedBy("System");
+        repository.save(updateEletrodomestico);
     }
 
     public EletrodomesticoDetailDTO getEletrodomesticoDetail(Long id) {
