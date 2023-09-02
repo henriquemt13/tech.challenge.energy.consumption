@@ -27,6 +27,7 @@ public class PessoaService {
 
     private final PessoaRepository repository;
     private final ParentescoService parentescoService;
+    private final ResidenteEnderecoService residenteEnderecoService;
     private final PessoaMapper mapper;
 
     public Long save(PessoaRequestDTO pessoaRequestDTO) {
@@ -96,6 +97,7 @@ public class PessoaService {
         }
         Pessoa pessoa = optionalPessoa.get();
         parentescoService.deleteParentescosByPessoaId(pessoaId);
+        residenteEnderecoService.deleteResidentes(residenteEnderecoService.findByPessoaId(pessoaId));
         repository.delete(pessoa);
     }
 

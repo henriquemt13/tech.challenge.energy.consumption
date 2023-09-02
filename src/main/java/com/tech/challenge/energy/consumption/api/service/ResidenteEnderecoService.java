@@ -57,7 +57,10 @@ public class ResidenteEnderecoService {
     }
 
     public void deleteByEnderecoId(Long enderecoId) {
-        List<ResidenteEndereco> residentes = findByEnderecoId(enderecoId);
+        deleteResidentes(findByEnderecoId(enderecoId));
+    }
+
+    public void deleteResidentes(List<ResidenteEndereco> residentes) {
         for (ResidenteEndereco residente : residentes) {
             repository.delete(residente);
         }
