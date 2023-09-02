@@ -83,6 +83,10 @@ public class EletrodomesticoController {
     @ApiResponse(description = "Endereco Detail Response", responseCode = "200")
     @Operation(summary = "Get All Eletrodomestico", description = """
           # Busca todos os Eletrodomesticos
+          ---
+          notes:
+          - Para busca sem filtros, apenas deixe "{}" nos parametros da requisição no Swagger,
+            ou não envie nada via, se estiver dia Postman ou Swagger;
           """)
     public ResponseEntity<List<Eletrodomestico>> getAllEletrodomesticos(EletrodomesticoDTO eletrodomesticoDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(eletrodomesticoDTO));

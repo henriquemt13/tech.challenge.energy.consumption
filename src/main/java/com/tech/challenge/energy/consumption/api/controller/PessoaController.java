@@ -71,6 +71,10 @@ public class PessoaController {
     @ApiResponse(description = "Pessoa response", responseCode = "200")
     @Operation(summary = "Find All Pessoa", description = """
           # Busca todas as Pessoas
+          ---
+          notes:
+          - Para busca sem filtros, apenas deixe "{}" nos parametros da requisição no Swagger,
+            ou não envie nada via, se estiver dia Postman ou Swagger;
           """)
     public ResponseEntity<List<Pessoa>> getAllPessoas(PessoaRequestDTO pessoaRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(pessoaRequestDTO));

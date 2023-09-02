@@ -78,6 +78,10 @@ public class EnderecoController {
     @ApiResponse(description = "Endereco Response", responseCode = "200")
     @Operation(summary = "Get All Enderecos", description = """
           # Busca todos os Enderecos
+          ---
+          notes:
+          - Para busca sem filtros, apenas deixe "{}" nos parametros da requisição no Swagger,
+            ou não envie nada via, se estiver dia Postman ou Swagger;
           """)
     public ResponseEntity getAllEnderecos(EnderecoDTO enderecoDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(enderecoDTO));
