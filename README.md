@@ -42,6 +42,11 @@ pessoa como dona.
 <br>
 <br>
 Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar. A coleção de testes utilizados na aplicação se encontra presente neste repositório, no arquivo **insomnia-collection.json**
+<br>
+<br>
+Para rodar a aplicação localmente, foi criado um docker-compose, que se encontra neste mesmo repositório
+Ao iniciar a aplicação, acesse o link http://localhost:8080/swagger-ui/index.html#/ para visualizar o Swagger, contendo a documentação dos endpoints desenvolvidos
+Nota: Todos os endpoints "findAll" possuem suporte para filtro de qualquer um dos campos da entidade requerida, mas se optar por testá-lo sem filtros, é só chamá-lo sem passar nenhum parametro!
 
 
 ---
