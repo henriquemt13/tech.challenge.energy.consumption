@@ -3,6 +3,7 @@
 ---
 ## Este projeto foi feito com base no Tech Challenge da Fase 2 do curso de Arquitetura e Desenvolvimento em Java da FIAP
 
+
 ---
 Sessões:
 - [Ideia por trás do desafio](#ideia-por-trás-do-desafio)
@@ -12,6 +13,7 @@ Sessões:
 
 ---
 ## Ideia por trás do desafio
+
 O desafio basicamente pede para que sejam criados três serviços, os respectivos: Pessoa, Eletrodoméstico e Endereço.
 A partir disso foi desenvolvida uma API contendo essas três entidades, criando relações entre si a partir da entidade Pessoa.
 O Fluxo de cadastro idealizado é descrito na imagem a seguir:
@@ -21,8 +23,10 @@ Cada entidade tem seu próprio CRUD, e cada uma tem uma funcionalidade específi
 
 
 
+
 ---
 ## Relatório Técnico
+
 Se na primeira fase pontuei o **Lombok** e o **Mapstruct** como bibliotecas/ferramentas essenciais para a agilidade no desenvolvimento desta aplicação, o grande destade da fase 2 do Tech Challenge se mostrou, para mim, ser o uso de **Migrations** com o **Flyway**.
 No ínicio sua configuração veio com algumas difículdades, porém se mostrou muito útil durante o desenvolvimento e essencial para a autonomia da aplicação em seu cenário ideal, isto é, garantir que a mesma seja capaz e responsável de subir seu ambiente de
 forma automática, sem a necessidade de configuração manual.
@@ -44,15 +48,16 @@ Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo c
 ## Serviços Disponíveis
 
 ### Entidade Pessoa
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/11cb1a5c-7d7b-4647-9462-3cb28d1b9cb1)
+
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/053f33e7-3ed2-4d9f-a280-fd1b07983665)
+
 
 ### Entidade Eletrodoméstico
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7d204ade-eb56-475a-a6b9-0bb35303989e)
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/417ba18e-28d2-42ed-b3a3-64722a146225)
+
 
 ### Entidade Endereco
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/04f7065e-b72a-441d-b717-e3b2374c8db4)
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7c12a77c-0f5f-42f4-a641-104bc36d255e)
 
-### Extra: Cenário de Erro
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7aaab44e-f52e-456b-a7f0-2ea94dc4b433)
 
 
