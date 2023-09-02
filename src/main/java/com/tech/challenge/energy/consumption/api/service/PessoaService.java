@@ -33,13 +33,16 @@ public class PessoaService {
     public Long save(PessoaRequestDTO pessoaRequestDTO) {
         Pessoa pessoa = mapper.pessoaRequestDTOToPessoaModel(pessoaRequestDTO);
         pessoa.setCreatedBy("System");
+        pessoa.setUpdatedBy("System");
         repository.save(pessoa);
         parentescoService.saveParentescos(pessoa.getId(), pessoaRequestDTO.getParentes());
         return pessoa.getId();
     }
 
     public void update(UpdatePessoaDTO pessoaDTO, Pessoa pessoa) {
-        repository.save(mapper.updatePessoaFromUpdatePessoaDTO(pessoaDTO, pessoa));
+        Pessoa updatePessoa = mapper.updatePessoaFromUpdatePessoaDTO(pessoaDTO, pessoa);
+        updatePessoa.setUpdatedBy("System");
+        repository.save(updatePessoa);
         if (pessoaDTO.getParentes() != null) {
             parentescoService.saveParentescos(pessoa.getId(), pessoaDTO.getParentes());
         }

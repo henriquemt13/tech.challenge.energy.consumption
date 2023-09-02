@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -47,6 +48,7 @@ public class Endereco {
     @Column(name = "created_by")
     private String createdBy;
     @Column(name = "updated_at")
+    @UpdateTimestamp
     private OffsetDateTime updatedAt;
     @Column(name = "updated_by")
     private String updatedBy;
