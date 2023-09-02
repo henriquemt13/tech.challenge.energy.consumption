@@ -1,7 +1,7 @@
 package com.tech.challenge.energy.consumption.api.domain.mapper;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.ResidentesEnderecoDTO;
-import com.tech.challenge.energy.consumption.api.domain.model.ResidentesEndereco;
+import com.tech.challenge.energy.consumption.api.domain.dto.ResidenteEnderecoDTO;
+import com.tech.challenge.energy.consumption.api.domain.model.ResidenteEndereco;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, componentModel = "spring")
 public interface ResidentesEnderecoMapper {
 
-    ResidentesEnderecoDTO residentesEnderecoToResidentesEnderecoDTO(ResidentesEndereco residentesEndereco);
+    ResidenteEnderecoDTO residenteEnderecoToResidenteEnderecoDTO(ResidenteEndereco residenteEndereco);
 
-    List<ResidentesEnderecoDTO> residentesEnderecoToResidentesEnderecoDTO(List<ResidentesEndereco> residentesEndereco);
+    List<ResidenteEnderecoDTO> residenteEnderecoToResidenteEnderecoDTO(List<ResidenteEndereco> residenteEndereco);
 
-    ResidentesEndereco residentesEnderecoDTOToResidentesEndereco(ResidentesEnderecoDTO residentesEnderecoDTO);
+    ResidenteEndereco residenteEnderecoDTOToResidenteEndereco(ResidenteEnderecoDTO residenteEnderecoDTO);
 }

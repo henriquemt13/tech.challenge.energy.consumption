@@ -14,7 +14,6 @@ public class EnderecoDetailDTO {
     private String cidade;
     private String bairro;
     private String estado;
-    private PessoaDTO dono;
     private List<PessoaDTO> residentes;
 
 }

@@ -5,13 +5,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ResidentesEnderecoDTO {
+public class ResidenteEnderecoDTO {
 
     private Long id;
     private Long pessoaId;
     private Long enderecoId;
 
-    public ResidentesEnderecoDTO(Long pessoaId, Long enderecoId) {
+    public ResidenteEnderecoDTO(Long pessoaId, Long enderecoId) {
         this.pessoaId = pessoaId;
         this.enderecoId = enderecoId;
     }

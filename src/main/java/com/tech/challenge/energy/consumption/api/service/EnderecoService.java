@@ -27,7 +27,7 @@ public class EnderecoService {
     private final PessoaService pessoaService;
     private final EnderecoRepository repository;
     private final EnderecoMapper mapper;
-    private final ResidentesEnderecoService residentesEnderecoService;
+    private final ResidenteEnderecoService residenteEnderecoService;
 
     public Long save(EnderecoDTO enderecoDTO, Long pessoaId) {
         pessoaService.validatePessoaId(pessoaId);
@@ -41,7 +41,7 @@ public class EnderecoService {
     public void addResidente(Long enderecoId, Long pessoaId) {
         pessoaService.validatePessoaId(pessoaId);
         if (isValidToAddResidente(enderecoId, pessoaId)) {
-            residentesEnderecoService.save(enderecoId, pessoaId);
+            residenteEnderecoService.save(enderecoId, pessoaId);
         } else {
             throw new NotFoundException(String.format("Pessoa ID [%s] and Endereco ID [%s] are already related",
                     pessoaId, enderecoId));
@@ -51,7 +51,7 @@ public class EnderecoService {
     public void removeResidente(Long enderecoId, Long pessoaId) {
         pessoaService.validatePessoaId(pessoaId);
         if (isValidToRemoveResidente(enderecoId, pessoaId)) {
-            residentesEnderecoService.deleteByEnderecoIdAndPessoaId(enderecoId, pessoaId);
+            residenteEnderecoService.deleteByEnderecoIdAndPessoaId(enderecoId, pessoaId);
         } else {
             throw new NotFoundException(String.format("Pessoas ID [%s] or Endereco ID [%s] relation not found",
                     pessoaId, enderecoId));
@@ -59,12 +59,12 @@ public class EnderecoService {
     }
 
     public boolean isValidToAddResidente(Long enderecoId, Long pessoaId) {
-        return residentesEnderecoService.findByPessoaId(pessoaId).isEmpty()
+        return residenteEnderecoService.findByPessoaId(pessoaId).isEmpty()
                 && findById(enderecoId).isPresent();
     }
 
     public boolean isValidToRemoveResidente(Long enderecoId, Long pessoaId) {
-        return residentesEnderecoService.findByEnderecoIdAndPessoaId(enderecoId, pessoaId).isPresent()
+        return residenteEnderecoService.findByEnderecoIdAndPessoaId(enderecoId, pessoaId).isPresent()
                 && findById(enderecoId).isPresent();
     }
 
@@ -86,7 +86,7 @@ public class EnderecoService {
         if (endereco.isEmpty()) {
             throw new EnderecoNotFound(id);
         }
-        residentesEnderecoService.deleteByEnderecoId(id);
+        residenteEnderecoService.deleteByEnderecoId(id);
         repository.delete(endereco.get());
     }
 
@@ -102,13 +102,13 @@ public class EnderecoService {
         if (endereco.isEmpty()) {
             throw new EnderecoNotFound(id);
         }
-        List<ResidentesEnderecoDTO> residentes = residentesEnderecoService.getByEnderecoId(endereco.get().getId());
+        List<ResidenteEnderecoDTO> residentes = residenteEnderecoService.getByEnderecoId(endereco.get().getId());
         return mapper.enderecoAndPessoaDTOtoEnderecoDetailDTO(endereco.get(), getResidentesInfo(residentes));
     }
 
-    public List<PessoaDTO> getResidentesInfo(List<ResidentesEnderecoDTO> residentes) {
+    public List<PessoaDTO> getResidentesInfo(List<ResidenteEnderecoDTO> residentes) {
         List<PessoaDTO> pessoas = new ArrayList<>();
-        for (ResidentesEnderecoDTO residente : residentes ) {
+        for (ResidenteEnderecoDTO residente : residentes ) {
             pessoas.add(pessoaService.getPessoaById(residente.getPessoaId()));
         }
         return pessoas;

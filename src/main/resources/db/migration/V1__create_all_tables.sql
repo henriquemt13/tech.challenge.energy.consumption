@@ -45,9 +45,9 @@ create table endereco(
 ALTER SEQUENCE endereco_seq
 OWNED BY endereco.id;
 
-create sequence residentes_endereco_seq;
-create table residentes_endereco(
-	id bigint primary key  not null DEFAULT nextval('residentes_endereco_seq'),
+create sequence residente_endereco_seq;
+create table residente_endereco(
+	id bigint primary key  not null DEFAULT nextval('residente_endereco_seq'),
 	id_pessoa bigint not null,
 	id_endereco bigint not null,
 	created_at timestamp not null,
