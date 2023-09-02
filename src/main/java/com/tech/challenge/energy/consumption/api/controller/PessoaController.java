@@ -7,6 +7,8 @@ import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaDetai
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.exceptions.PessoaNotFound;
 import com.tech.challenge.energy.consumption.api.service.PessoaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,37 +28,80 @@ public class PessoaController {
     private final PessoaService service;
 
     @PostMapping
+    @ApiResponse(description = "Pessoa Response", responseCode = "201")
+    @Operation(summary = "Create Pessoa", description = """
+          # Cria nova Pessoa
+          ---
+          notes:
+          - Para adicionar um parente, ele préviamente precisa existir como uma outra pessoa salva no banco;
+          """)
     public ResponseEntity<CreateResponseDTO> createPessoa(@RequestBody @Valid PessoaRequestDTO pessoaRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new CreateResponseDTO(service.save(pessoaRequestDTO)));
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<Void> updatePessoa(@PathVariable("userId") Long userId,
+    @PutMapping("/{pessoaId}")
+    @ApiResponse(description = "Void", responseCode = "200")
+    @Operation(summary = "Update Pessoa by id", description = """
+          # Atualiza pessoa pelo ID
+          ---
+          notes:
+          - Pessoa precisa existir no banco;
+          """)
+    public ResponseEntity<Void> updatePessoa(@PathVariable("pessoaId") Long pessoaId,
                                                           @RequestBody @Valid UpdatePessoaDTO pessoaDTO) {
-        Pessoa pessoa = validatePessoaById(userId);
+        Pessoa pessoa = validatePessoaById(pessoaId);
         service.update(pessoaDTO, pessoa);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<Pessoa> getPessoaById(@PathVariable("userId") Long userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(validatePessoaById(userId));
+    @GetMapping("/{pessoaId}")
+    @ApiResponse(description = "Pessoa response", responseCode = "200")
+    @Operation(summary = "Get Pessoa by id", description = """
+          # Busca pessoa Pelo Id
+          ---
+          notes:
+          - Pessoa precisa existir no banco;
+          """)
+    public ResponseEntity<Pessoa> getPessoaById(@PathVariable("pessoaId") Long pessoaId) {
+        return ResponseEntity.status(HttpStatus.OK).body(validatePessoaById(pessoaId));
     }
 
     @GetMapping
+    @ApiResponse(description = "Pessoa response", responseCode = "200")
+    @Operation(summary = "Find All Pessoa", description = """
+          # Busca todas as Pessoas
+          ---
+          notes:
+          - Para busca sem filtros, apenas deixe "{}" nos parametros da requisição no Swagger,
+            ou não envie nada via, se estiver dia Postman ou Swagger;
+          """)
     public ResponseEntity<List<Pessoa>> getAllPessoas(PessoaRequestDTO pessoaRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByFilter(pessoaRequestDTO));
     }
 
-    @GetMapping("/parentes/{userId}")
-    public ResponseEntity<PessoaDetailDTO> getParentesById(@PathVariable("userId") Long userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findParentesById(userId));
+    @GetMapping("/parentes/{pessoaId}")
+    @ApiResponse(description = "Pessoa Detail response", responseCode = "200")
+    @Operation(summary = "Get Parentes by Pessoa ID", description = """
+          # Busca parentes a partir da Pessoa ID
+          ---
+          notes:
+          - Pessoa precisa existir no banco;
+          """)
+    public ResponseEntity<PessoaDetailDTO> getParentesById(@PathVariable("pessoaId") Long pessoaId) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findParentesById(pessoaId));
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Pessoa> deletePessoaById(@PathVariable("userId") Long userId) {
-        service.delete(userId);
+    @DeleteMapping("/{pessoaId}")
+    @ApiResponse(description = "Void", responseCode = "200")
+    @Operation(summary = "Delete Pessoa by id", description = """
+          # Apaga Pessoa por ID
+          ---
+          notes:
+          - Pessoa precisa existir no banco;
+          """)
+    public ResponseEntity<Void> deletePessoaById(@PathVariable("pessoaId") Long pessoaId) {
+        service.delete(pessoaId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

@@ -41,7 +41,7 @@ Enquanto a entidade Pessoa se vê independente das outras, um Endereço precisa 
 pessoa como dona.
 <br>
 <br>
-Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar.
+Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar. A coleção de testes utilizados na aplicação se encontra presente neste repositório, no arquivo **insomnia-collection.json**
 
 
 ---
