@@ -33,8 +33,10 @@ testes e erros, a ideia final foi que a entidade Pessoa seria única e exclusiva
 Por fim, a entidade Endereço ficou responsabilizada por cuidar de toda gestão de Residentes, adição de novos residentes, remoção e visualização.
 <br>
 <br>
-Enquanto a entidade pPessoa se vê independente das outras, um Endereço precisa de uma pessoa para ser criado, mas a mesma pode ser dissociada dele, através do serviço **removeResidente**. Enquanto isso, um Eletrodoméstico obrigatóriamente precisa ter uma 
+Enquanto a entidade Pessoa se vê independente das outras, um Endereço precisa de uma pessoa para ser criado, mas a mesma pode ser dissociada dele, através do serviço **removeResidente**. Enquanto isso, um Eletrodoméstico obrigatóriamente precisa ter uma 
 pessoa como dona.
+<br>
+<br>
 Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar.
 
 
