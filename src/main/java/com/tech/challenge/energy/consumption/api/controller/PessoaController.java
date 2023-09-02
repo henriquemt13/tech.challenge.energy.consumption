@@ -48,7 +48,7 @@ public class PessoaController {
           notes:
           - Pessoa precisa existir no banco;
           """)
-    public ResponseEntity<Void> updatePessoa(@PathVariable("userId") Long pessoaId,
+    public ResponseEntity<Void> updatePessoa(@PathVariable("pessoaId") Long pessoaId,
                                                           @RequestBody @Valid UpdatePessoaDTO pessoaDTO) {
         Pessoa pessoa = validatePessoaById(pessoaId);
         service.update(pessoaDTO, pessoa);
@@ -63,7 +63,7 @@ public class PessoaController {
           notes:
           - Pessoa precisa existir no banco;
           """)
-    public ResponseEntity<Pessoa> getPessoaById(@PathVariable("userId") Long pessoaId) {
+    public ResponseEntity<Pessoa> getPessoaById(@PathVariable("pessoaId") Long pessoaId) {
         return ResponseEntity.status(HttpStatus.OK).body(validatePessoaById(pessoaId));
     }
 
@@ -96,7 +96,7 @@ public class PessoaController {
           notes:
           - Pessoa precisa existir no banco;
           """)
-    public ResponseEntity<Void> deletePessoaById(@PathVariable("userId") Long pessoaId) {
+    public ResponseEntity<Void> deletePessoaById(@PathVariable("pessoaId") Long pessoaId) {
         service.delete(pessoaId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
