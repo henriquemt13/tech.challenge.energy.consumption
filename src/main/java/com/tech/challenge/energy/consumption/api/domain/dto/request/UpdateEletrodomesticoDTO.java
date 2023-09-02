@@ -7,4 +7,5 @@ public class UpdateEletrodomesticoDTO {
     private String nome;
     private String modelo;
     private Integer potencia;
+    private Integer horasUsoDia;
 }

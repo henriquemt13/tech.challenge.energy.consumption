@@ -17,5 +17,4 @@ public class EletrodomesticoDTO {
     private Integer potencia;
     @NotNull(message = "horasUsoDia should not be null")
     private Integer horasUsoDia;
-    private Long pessoaId;
 }

@@ -1,9 +1,9 @@
 package com.tech.challenge.energy.consumption.api.controller;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.request.PessoaRequestDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdatePessoaDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.CreateResponseDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.PessoaDetailDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.exceptions.PessoaNotFound;
 import com.tech.challenge.energy.consumption.api.service.PessoaService;
@@ -26,9 +26,9 @@ public class PessoaController {
     private final PessoaService service;
 
     @PostMapping
-    public ResponseEntity<PessoaResponseDTO> createPessoa(@RequestBody @Valid PessoaRequestDTO pessoaRequestDTO) {
+    public ResponseEntity<CreateResponseDTO> createPessoa(@RequestBody @Valid PessoaRequestDTO pessoaRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new PessoaResponseDTO(service.save(pessoaRequestDTO)));
+                .body(new CreateResponseDTO(service.save(pessoaRequestDTO)));
     }
 
     @PutMapping("/{userId}")

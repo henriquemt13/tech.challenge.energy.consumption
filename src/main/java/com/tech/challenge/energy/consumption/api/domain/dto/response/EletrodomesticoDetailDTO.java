@@ -14,6 +14,6 @@ public class EletrodomesticoDetailDTO {
     private String nome;
     private String modelo;
     private String potencia;
-    private Integer horas_uso_dia;
+    private Integer horasUsoDia;
     private String mediaConsumoEnergia;
 }

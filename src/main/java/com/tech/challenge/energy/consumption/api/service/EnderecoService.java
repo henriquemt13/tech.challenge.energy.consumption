@@ -4,10 +4,8 @@ import com.tech.challenge.energy.consumption.api.domain.dto.*;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.EnderecoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdateEnderecoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.response.EnderecoDetailDTO;
-import com.tech.challenge.energy.consumption.api.domain.dto.response.EnderecoResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.mapper.EnderecoMapper;
 import com.tech.challenge.energy.consumption.api.domain.model.Endereco;
-import com.tech.challenge.energy.consumption.api.domain.model.ResidentesEndereco;
 import com.tech.challenge.energy.consumption.api.exceptions.EnderecoNotFound;
 import com.tech.challenge.energy.consumption.api.exceptions.NotFoundException;
 import com.tech.challenge.energy.consumption.api.repository.EnderecoRepository;
@@ -31,13 +29,13 @@ public class EnderecoService {
     private final EnderecoMapper mapper;
     private final ResidentesEnderecoService residentesEnderecoService;
 
-    public EnderecoResponseDTO save(EnderecoDTO enderecoDTO, Long pessoaId) {
+    public Long save(EnderecoDTO enderecoDTO, Long pessoaId) {
         pessoaService.validatePessoaId(pessoaId);
         Endereco endereco = mapper.enderecoDTOToEnderecoModel(enderecoDTO);
         endereco.setCreatedBy("System");
         repository.save(endereco);
         addResidente(endereco.getId(), pessoaId);
-        return EnderecoResponseDTO.builder().id(endereco.getId()).build();
+        return endereco.getId();
     }
 
     public void addResidente(Long enderecoId, Long pessoaId) {

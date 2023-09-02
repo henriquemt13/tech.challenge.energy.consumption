@@ -1,6 +1,5 @@
 package com.tech.challenge.energy.consumption.api.service;
 
-import com.tech.challenge.energy.consumption.api.domain.dto.*;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.EletrodomesticoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdateEletrodomesticoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.response.EletrodomesticoDetailDTO;
@@ -15,7 +14,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.math.MathContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +27,11 @@ public class EletrodomesticoService {
     private final EletrodomesticoRepository repository;
     private final EletrodomesticoMapper mapper;
 
-    public void save(EletrodomesticoDTO eletrodomesticoDTO, Long pessoaId) {
+    public Long save(EletrodomesticoDTO eletrodomesticoDTO, Long pessoaId) {
         pessoaService.validatePessoaId(pessoaId);
         Eletrodomestico eletrodomestico = mapper.eletrodomesticoDTOToEletrodomesticoModel(eletrodomesticoDTO, pessoaId);
         eletrodomestico.setCreatedBy("System");
-        repository.save(eletrodomestico);
+        return repository.save(eletrodomestico).getId();
     }
 
     public void update(Long id, UpdateEletrodomesticoDTO eletrodomesticoDTO) {
@@ -54,15 +53,15 @@ public class EletrodomesticoService {
         return detailDTO;
     }
 
-    private EletrodomesticoDetailDTO setConsumoValues(EletrodomesticoDetailDTO detailDTO, Eletrodomestico eletrodomestico) {
+    private void setConsumoValues(EletrodomesticoDetailDTO detailDTO, Eletrodomestico eletrodomestico) {
         detailDTO.setPotencia(String.format("%s W", eletrodomestico.getPotencia()));
         detailDTO.setMediaConsumoEnergia(String.format("%s kWh",
                 calculateConsumo(eletrodomestico.getHorasUsoDia(), eletrodomestico.getPotencia())));
-        return detailDTO;
     }
 
     private BigDecimal calculateConsumo(Integer horasConsumoDia, Integer potencia) {
-        return BigDecimal.valueOf(((long) potencia * horasConsumoDia) / 1000);
+        BigDecimal kW = BigDecimal.valueOf((long) potencia * horasConsumoDia);
+        return kW.divide(BigDecimal.valueOf(1000)).round(MathContext.DECIMAL32);
     }
 
     public List<Eletrodomestico> findByPessoaId(Long pessoaId) {

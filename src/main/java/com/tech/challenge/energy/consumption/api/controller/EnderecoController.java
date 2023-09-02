@@ -2,8 +2,8 @@ package com.tech.challenge.energy.consumption.api.controller;
 
 import com.tech.challenge.energy.consumption.api.domain.dto.request.EnderecoDTO;
 import com.tech.challenge.energy.consumption.api.domain.dto.request.UpdateEnderecoDTO;
+import com.tech.challenge.energy.consumption.api.domain.dto.response.CreateResponseDTO;
 import com.tech.challenge.energy.consumption.api.domain.model.Endereco;
-import com.tech.challenge.energy.consumption.api.domain.model.Pessoa;
 import com.tech.challenge.energy.consumption.api.exceptions.EnderecoNotFound;
 import com.tech.challenge.energy.consumption.api.service.EnderecoService;
 import jakarta.validation.Valid;
@@ -24,9 +24,10 @@ public class EnderecoController {
     private final EnderecoService service;
 
     @PostMapping("/pessoa/{pessoaId}")
-    public ResponseEntity createEndereco(@RequestBody @Valid EnderecoDTO enderecoDTO, @PathVariable("pessoaId") Long pessoaId) {
-        service.save(enderecoDTO, pessoaId);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<CreateResponseDTO> createEndereco(@RequestBody @Valid EnderecoDTO enderecoDTO, @PathVariable("pessoaId") Long pessoaId) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CreateResponseDTO(service.save(enderecoDTO, pessoaId)));
     }
 
     @PutMapping("/{id}")
