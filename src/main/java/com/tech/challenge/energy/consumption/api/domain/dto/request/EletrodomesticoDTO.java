@@ -1,4 +1,4 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,4 +15,6 @@ public class EletrodomesticoDTO {
     private String modelo;
     @NotNull(message = "potencia should not be null")
     private Integer potencia;
+    @NotNull(message = "horasUsoDia should not be null")
+    private Integer horasUsoDia;
 }

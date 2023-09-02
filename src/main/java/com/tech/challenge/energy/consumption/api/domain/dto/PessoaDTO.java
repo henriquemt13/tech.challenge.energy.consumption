@@ -1,21 +1,16 @@
 package com.tech.challenge.energy.consumption.api.domain.dto;
 
-import com.tech.challenge.energy.consumption.api.enums.SexoEnum;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import com.tech.challenge.energy.consumption.api.domain.dto.request.ParentescoRequestDTO;
 import lombok.Data;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class PessoaDTO {
-    @NotNull(message = "nome should not be null")
-    @NotEmpty(message = "nome should not be empty")
+    private Long id;
     private String nome;
-    @NotNull(message = "dataNascimento should not be null")
     private LocalDate dataNascimento;
-    @NotNull(message = "sexoEnum should not be null")
-    private SexoEnum sexoEnum;
-    @NotNull(message = "parentescoComUsuario should not be null")
-    @NotEmpty(message = "parentescoComUsuario should not be empty")
-    private String parentescoComUsuario;
+    private String genero;
+    private List<ParentescoRequestDTO> parentes;
 }

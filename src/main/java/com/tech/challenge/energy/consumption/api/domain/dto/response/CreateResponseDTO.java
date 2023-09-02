@@ -1,10 +1,11 @@
-package com.tech.challenge.energy.consumption.api.domain.dto;
+package com.tech.challenge.energy.consumption.api.domain.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PessoaResponseDTO {
+public class CreateResponseDTO {
+
     private Long id;
 }
