@@ -27,8 +27,8 @@ Cada entidade tem seu próprio CRUD, e cada uma tem uma funcionalidade específi
 ---
 ## Relatório Técnico
 
-Se na primeira fase pontuei o **Lombok** e o **Mapstruct** como bibliotecas/ferramentas essenciais para a agilidade no desenvolvimento desta aplicação, o grande destade da fase 2 do Tech Challenge se mostrou, para mim, ser o uso de **Migrations** com o **Flyway**.
-No ínicio sua configuração veio com algumas difículdades, porém se mostrou muito útil durante o desenvolvimento e essencial para a autonomia da aplicação em seu cenário ideal, isto é, garantir que a mesma seja capaz e responsável de subir seu ambiente de
+Se na primeira fase pontuei o **Lombok** e o **Mapstruct** como bibliotecas/ferramentas essenciais para a agilidade no desenvolvimento desta aplicação, o grande destaque da fase 2 do Tech Challenge se mostrou, para mim, ser o uso de **Migrations** com o **Flyway**.
+No início sua configuração veio com algumas dificuldades, porém se mostrou muito útil durante o desenvolvimento e essencial para a autonomia da aplicação em seu cenário ideal, isto é, garantir que a mesma seja capaz e responsável de subir seu ambiente de
 forma automática, sem a necessidade de configuração manual.
 <br>
 <br>
@@ -37,23 +37,23 @@ funcione perfeitamente.
 <br>
 <br>
 Um ponto de grande dificuldade nessa segunda fase do desafio foi definir a lógica e relacionamento entre todas as três entidades, acredito que passei por pelo menos 5 versões distintas até chegar na versão final presente nesta entrega. Após muitos desenhos, fluxos,
-testes, erros, e mais o mais importante, as aulas de **DDD**, a ideia final foi que a entidade Pessoa seria única e exclusivamente responsável por gerenciar a criação, relacionamento e visualização de Pessoas e Parentes. Já a entidade Eletrodoméstico ficou com a tarefa de gerir os eletrodomésticos a partir de um dono (entidade Pessoa) calcular a média do consumo mensal de cada produto cadastrado.
+testes, erros, e mais o mais importante, as aulas de **DDD**, a ideia final foi que a entidade Pessoa seria única e exclusivamente responsável por gerenciar a criação, relacionamento e visualização de Pessoas e Parentes. Já a entidade Eletrodoméstico ficou com a tarefa de gerir os eletrodomésticos a partir de um dono (entidade Pessoa) e calcular a média do consumo mensal de cada produto cadastrado.
 Por fim, a entidade Endereço ficou responsabilizada por cuidar de toda gestão de Endereços e Residentes, adição de novos residentes, remoção e visualização.
 <br>
 <br>
-Enquanto a entidade Pessoa se vê independente das outras, um Endereço precisa de uma pessoa para ser criado, mas a mesma pode ser dissociada dele, através do serviço **removeResidente**. Enquanto isso, um Eletrodoméstico obrigatóriamente precisa ter uma 
+Enquanto a entidade Pessoa se vê independente das outras, um Endereço precisa de uma pessoa para ser criado, mas a mesma pode ser dissociada dele, através do serviço **removeResidente()**. Enquanto isso, um Eletrodoméstico obrigatoriamente precisa ter uma 
 pessoa como dona.
+<br>
+_Nota: Todos os endpoints "findAll()" possuem suporte para filtro de qualquer um dos campos da entidade requerida, mas se optar por testá-lo sem filtros, é só chamá-lo sem passar nenhum parâmetro!_
 <br>
 <br>
 Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo costume, sinto que é uma ferramenta mais leve e simples de configurar. A coleção de testes utilizados na aplicação se encontra presente neste repositório, no arquivo **insomnia-collection.json**
 <br>
 <br>
-Para rodar a aplicação localmente, foi criado um docker-compose, que se encontra neste mesmo repositório
+Para rodar a aplicação localmente, foi criado um docker-compose, que se encontra neste mesmo repositório.
 <br>
 Ao iniciar a aplicação, acesse o link http://localhost:8080/swagger-ui/index.html#/ para visualizar o Swagger, contendo a documentação dos endpoints desenvolvidos
-<br>
-<br>
-Nota: Todos os endpoints "findAll()" possuem suporte para filtro de qualquer um dos campos da entidade requerida, mas se optar por testá-lo sem filtros, é só chamá-lo sem passar nenhum parametro!
+
 
 
 ---
