@@ -37,8 +37,8 @@ funcione perfeitamente.
 <br>
 <br>
 Um ponto de grande dificuldade nessa segunda fase do desafio foi definir a lógica e relacionamento entre todas as três entidades, acredito que passei por pelo menos 5 versões distintas até chegar na versão final presente nesta entrega. Após muitos desenhos, fluxos,
-testes e erros, a ideia final foi que a entidade Pessoa seria única e exclusivamente responsável por gerenciar a criação e visualização de Parentes. Já a entidade Eletrodoméstico ficou com a tarefa de calcular a média do consumo mensal de cada produto cadastrado.
-Por fim, a entidade Endereço ficou responsabilizada por cuidar de toda gestão de Residentes, adição de novos residentes, remoção e visualização.
+testes, erros, e mais o mais importante, as aulas de **DDD**, a ideia final foi que a entidade Pessoa seria única e exclusivamente responsável por gerenciar a criação e visualização de Parentes. Já a entidade Eletrodoméstico ficou com a tarefa de gerir os eletrodomésticos a partir de um dono (entidade Pessoa) calcular a média do consumo mensal de cada produto cadastrado.
+Por fim, a entidade Endereço ficou responsabilizada por cuidar de toda gestão de Endereços e Residentes, adição de novos residentes, remoção e visualização.
 <br>
 <br>
 Enquanto a entidade Pessoa se vê independente das outras, um Endereço precisa de uma pessoa para ser criado, mas a mesma pode ser dissociada dele, através do serviço **removeResidente**. Enquanto isso, um Eletrodoméstico obrigatóriamente precisa ter uma 
