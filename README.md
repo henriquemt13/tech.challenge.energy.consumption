@@ -44,15 +44,17 @@ Para testar a API, decidi utilizar o Insomnia ao invés do Postman apenas pelo c
 ## Serviços Disponíveis
 
 ### Entidade Pessoa
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/11cb1a5c-7d7b-4647-9462-3cb28d1b9cb1)
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/053f33e7-3ed2-4d9f-a280-fd1b07983665)
+
 
 ### Entidade Eletrodoméstico
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7d204ade-eb56-475a-a6b9-0bb35303989e)
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/417ba18e-28d2-42ed-b3a3-64722a146225)
+
 
 ### Entidade Endereco
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/04f7065e-b72a-441d-b717-e3b2374c8db4)
+![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7c12a77c-0f5f-42f4-a641-104bc36d255e)
 
-### Extra: Cenário de Erro
-![image](https://github.com/henriquemt13/tech.challenge.energy.consumption.api/assets/47531611/7aaab44e-f52e-456b-a7f0-2ea94dc4b433)
+
+
 
 
