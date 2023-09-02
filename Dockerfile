@@ -12,7 +12,7 @@ RUN mvn -B -e clean install -DskipTests=true
 FROM amazoncorretto:17-alpine3.15-jdk AS runner
 
 WORKDIR /app
-COPY --from=build /build/ccee-meter-api/target/*.jar ./application.jar
+COPY --from=build /build/energy-consumption-api/target/*.jar ./application.jar
 
 EXPOSE 80
 
