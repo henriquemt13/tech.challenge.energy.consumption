@@ -1,0 +1,22 @@
+version: "4.0"
+
+services:
+  database:
+    image: postgres:13
+    container_name: energy_consumption
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+
+  energy-consumption-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_SERVER=database
+      - SERVER_PORT=80
+    ports:
+      - "80:80"
