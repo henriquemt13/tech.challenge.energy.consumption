@@ -32,6 +32,10 @@ No ínicio sua configuração veio com algumas difículdades, porém se mostrou 
 forma automática, sem a necessidade de configuração manual.
 <br>
 <br>
+Outro destaque no desenvolvimento foi o uso das ferramentas do **Docker** para criação e disponibilização local do banco de dados e aplicação, culminando num docker compose, que com um simples comando é capaz de criar todo o ambiente necessário para que a aplicação
+funcione perfeitamente.
+<br>
+<br>
 Um ponto de grande dificuldade nessa segunda fase do desafio foi definir a lógica e relacionamento entre todas as três entidades, acredito que passei por pelo menos 5 versões distintas até chegar na versão final presente nesta entrega. Após muitos desenhos, fluxos,
 testes e erros, a ideia final foi que a entidade Pessoa seria única e exclusivamente responsável por gerenciar a criação e visualização de Parentes. Já a entidade Eletrodoméstico ficou com a tarefa de calcular a média do consumo mensal de cada produto cadastrado.
 Por fim, a entidade Endereço ficou responsabilizada por cuidar de toda gestão de Residentes, adição de novos residentes, remoção e visualização.
